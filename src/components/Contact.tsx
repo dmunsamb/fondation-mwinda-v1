@@ -49,6 +49,7 @@ const Contact = () => {
   data-netlify="true" 
   name="contact-foundation" 
   data-netlify-honeypot="bot-field"
+  netlify
   className="space-y-6 bg-white p-8 rounded-[2rem] shadow-xl shadow-gray-100 border border-gray-50"
 >
   {/* Champ caché indispensable pour React/Vite */}
