@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page Introuvable | Fondation Mwinda</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            dark: '#1a365d',
+                            blue: '#2563eb',
+                            primary: '#fbbf24' // Ajuste selon ta charte réelle
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-50 flex items-center justify-center min-h-screen p-6">
+    <div class="max-w-md w-full text-center bg-white p-10 rounded-[2.5rem] shadow-2xl shadow-gray-200 border border-gray-100">
+        
+        <div class="mb-8 flex justify-center">
+            <div class="w-24 h-24 rounded-2xl overflow-hidden bg-brand-dark/5 p-2 border-2 border-brand-dark/10">
+                <img src="/logo.png" alt="Fondation Mwinda" class="w-full h-full object-contain" onerror="this.src='https://via.placeholder.com/150?text=Mwinda'">
+            </div>
+        </div>
+
+        <h1 class="text-7xl font-black text-brand-dark mb-4">404</h1>
+        <h2 class="text-2xl font-bold text-gray-800 mb-4">Oups ! Page introuvable</h2>
+        <p class="text-gray-500 mb-10 leading-relaxed">
+            Il semble que la page que vous cherchez n'existe pas ou a été déplacée vers un nouvel horizon.
+        </p>
+
+        <a href="/" class="inline-flex items-center justify-center w-full bg-brand-dark text-white px-8 py-4 rounded-2xl font-bold hover:bg-brand-blue transform hover:-translate-y-1 transition-all duration-300 shadow-lg shadow-brand-dark/20">
+            Retourner à l'accueil
+        </a>
+
+        <p class="mt-8 text-xs text-gray-400 uppercase tracking-widest font-medium">
+            Fondation Mwinda RDC
+        </p>
+    </div>
+</body>
+</html>

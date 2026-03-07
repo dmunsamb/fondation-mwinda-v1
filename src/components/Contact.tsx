@@ -52,9 +52,8 @@ const Contact = () => {
   netlify
   className="space-y-6 bg-white p-8 rounded-[2rem] shadow-xl shadow-gray-100 border border-gray-50"
 >
-  {/* Champ caché indispensable pour React/Vite */}
   <input type="hidden" name="form-name" value="contact-foundation" />
-{/* AJOUTÉ : Ce champ aide Netlify à identifier le formulaire */}
+  <input type="hidden" name="subject" value="Nouveau message via le site Fondation Mwinda" />
   <p className="hidden">
     <label>Don't fill this out if you're human: <input name="bot-field" /></label>
   </p>
