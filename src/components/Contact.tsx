@@ -44,13 +44,15 @@ const Contact = () => {
               </div>
             </div>
 
-            <form className="space-y-6 bg-white p-8 rounded-[2rem] shadow-xl shadow-gray-100 border border-gray-50">
+            <form method="POST" data-netlify="true" name="contact-foundation" className="space-y-6 bg-white p-8 rounded-[2rem] shadow-xl shadow-gray-100 border border-gray-50">
+              <input type="hidden" name="form-name" value="contact-foundation" />
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="space-y-2">
                   <label className="text-sm font-bold text-gray-700 ml-4">Nom complet</label>
                   <input 
                     type="text" 
                     placeholder="Votre nom" 
+                    required
                     className="w-full px-6 py-4 bg-gray-50 border border-gray-100 rounded-2xl focus:outline-none focus:ring-2 focus:ring-brand-blue/20 focus:border-brand-blue transition-all"
                   />
                 </div>
@@ -59,6 +61,7 @@ const Contact = () => {
                   <input 
                     type="email" 
                     placeholder="votre@email.com" 
+                    required
                     className="w-full px-6 py-4 bg-gray-50 border border-gray-100 rounded-2xl focus:outline-none focus:ring-2 focus:ring-brand-blue/20 focus:border-brand-blue transition-all"
                   />
                 </div>
@@ -68,6 +71,7 @@ const Contact = () => {
                 <input 
                   type="text" 
                   placeholder="Comment pouvons-nous vous aider ?" 
+                  required
                   className="w-full px-6 py-4 bg-gray-50 border border-gray-100 rounded-2xl focus:outline-none focus:ring-2 focus:ring-brand-blue/20 focus:border-brand-blue transition-all"
                 />
               </div>
@@ -76,10 +80,11 @@ const Contact = () => {
                 <textarea 
                   rows={5} 
                   placeholder="Votre message..." 
+                  required
                   className="w-full px-6 py-4 bg-gray-50 border border-gray-100 rounded-2xl focus:outline-none focus:ring-2 focus:ring-brand-blue/20 focus:border-brand-blue transition-all resize-none"
                 ></textarea>
               </div>
-              <button className="w-full bg-brand-dark text-white px-10 py-5 rounded-2xl font-bold hover:bg-brand-blue transition-all flex items-center justify-center gap-3 group shadow-lg shadow-brand-dark/20">
+              <button type="submit" className="w-full bg-brand-dark text-white px-10 py-5 rounded-2xl font-bold hover:bg-brand-blue transition-all flex items-center justify-center gap-3 group shadow-lg shadow-brand-dark/20">
                 Envoyer le message <Send size={20} className="group-hover:translate-x-1 transition-transform" />
               </button>
             </form>
