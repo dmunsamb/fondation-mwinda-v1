@@ -151,7 +151,7 @@ const Home = () => {
               <div className="absolute inset-0 bg-brand-blue/20 group-hover:bg-transparent transition-colors duration-500 pointer-events-none z-10"></div>
               <iframe 
                 className="w-full h-full"
-                src="https://www.youtube.com/embed/UCwvOgJjt7TQkwnp6roZwgbQ" 
+                src="https://www.youtube.com/watch?v=fcGI_GIJy5Y" 
                 title="Fondation Mwinda Presentation"
                 frameBorder="0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
