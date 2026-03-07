@@ -48,11 +48,15 @@ const Contact = () => {
   method="POST" 
   data-netlify="true" 
   name="contact-foundation" 
+  data-netlify-honeypot="bot-field"
   className="space-y-6 bg-white p-8 rounded-[2rem] shadow-xl shadow-gray-100 border border-gray-50"
 >
   {/* Champ caché indispensable pour React/Vite */}
   <input type="hidden" name="form-name" value="contact-foundation" />
-
+{/* AJOUTÉ : Ce champ aide Netlify à identifier le formulaire */}
+  <p className="hidden">
+    <label>Don't fill this out if you're human: <input name="bot-field" /></label>
+  </p>
   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
     <div className="space-y-2">
       <label className="text-sm font-bold text-gray-700 ml-4">Nom complet</label>
