@@ -93,6 +93,22 @@ export const PROJECTS = [
     status: 'En cours',
     location: 'Tshilenge',
     image: 'https://picsum.photos/seed/proj3/600/400'
+  },
+  {
+    id: 'college-mwinda-notre-avenir',
+    title: 'École Mwinda Notre Avenir',
+    description: 'Établissement scolaire ouvert par la Fondation Mwinda pour garantir l\'accès à l\'éducation aux enfants vulnérables.',
+    status: 'Réalisé',
+    location: 'Kinshasa',
+    image: 'https://i0.wp.com/fondationmwinda.com/wp-content/uploads/2021/03/FOM-College.png'
+  },
+  {
+    id: 'pharmacie-mwinda-lubumbashi',
+    title: 'Pharmacie Mwinda de Lubumbashi',
+    description: 'Pharmacie offrant des médicaments gratuits aux veuves et filles-mères, inaugurée par l\'équipe FOM Lubumbashi.',
+    status: 'Réalisé',
+    location: 'Lubumbashi',
+    image: 'https://i0.wp.com/fondationmwinda.com/wp-content/uploads/2021/03/FOM-Pharmacie.jpg'
   }
 ];
 
@@ -110,6 +126,34 @@ export const BLOG_POSTS = [
     excerpt: 'Félicitations à la grande équipe de la FONDATION MWINDA pour l’obtention de 100 hectares à Mbuji-Mayi. FOM tient particulièrement à remercier l’OMS.',
     date: '2024-04-20',
     image: 'https://picsum.photos/seed/fom-blog2/600/400'
+  },
+  {
+    id: 'inauguration-ecole-notre-avenir',
+    title: 'L’inauguration de l’école Mwinda Notre Avenir',
+    excerpt: 'Le 20 décembre 2019, inauguration officielle de l’école Mwinda Notre Avenir, un établissement dédié à l’éducation des enfants vulnérables.',
+    date: '2021-03-30',
+    image: 'https://i0.wp.com/fondationmwinda.com/wp-content/uploads/2021/03/FOM-College.png'
+  },
+  {
+    id: 'inauguration-pharmacie-lubumbashi',
+    title: 'Inauguration de la pharmacie Mwinda de Lubumbashi',
+    excerpt: 'Le 28 décembre 2019, départ pour Lubumbashi et rencontre avec les membres de l’équipe FOM Lubumbashi pour l’inauguration de la pharmacie Mwinda.',
+    date: '2021-03-30',
+    image: 'https://i0.wp.com/fondationmwinda.com/wp-content/uploads/2021/03/FOM-Pharmacie.jpg'
+  },
+  {
+    id: 'partenariat-kintambo',
+    title: 'Signature du partenariat avec le Home de vieillards de Kintambo',
+    excerpt: 'Le 23 décembre 2019, signature officielle du contrat de partenariat avec le Home de vieillards de Kintambo, renforçant l’engagement de la FOM auprès des aînés.',
+    date: '2021-03-30',
+    image: 'https://i0.wp.com/fondationmwinda.com/wp-content/uploads/2021/03/FOM-Kintambo.png'
+  },
+  {
+    id: 'je-suis-goma',
+    title: 'Je suis Goma, merci',
+    excerpt: 'Grâce à vos contributions, nous avons pu vêtir plus de 60 orphelins sinistrés lors de l’opération "Je suis Goma". C’est par de petits gestes comme le vôtre que nous pouvons exister.',
+    date: '2021-07-01',
+    image: 'https://i0.wp.com/fondationmwinda.com/wp-content/uploads/2021/07/fondation-mwinda-je-suis-Goma-1.jpg'
   }
 ];
 
