@@ -8,6 +8,9 @@ const Home = lazy(() => import('./pages/Home'));
 const About = lazy(() => import('./pages/About'));
 const Projects = lazy(() => import('./pages/Projects'));
 const Contact = lazy(() => import('./pages/Contact'));
+const SoutenezNous = lazy(() => import('./pages/SoutenezNous'));
+const Blog = lazy(() => import('./pages/Blog'));
+const Events = lazy(() => import('./pages/Events'));
 
 const ScrollToTop = () => {
   const { pathname } = useLocation();
@@ -37,6 +40,9 @@ export default function App() {
               <Route path="/about" element={<About />} />
               <Route path="/projects" element={<Projects />} />
               <Route path="/contact" element={<Contact />} />
+              <Route path="/soutenez-nous" element={<SoutenezNous />} />
+              <Route path="/blog" element={<Blog />} />
+              <Route path="/events" element={<Events />} />
             </Routes>
           </Suspense>
         </main>

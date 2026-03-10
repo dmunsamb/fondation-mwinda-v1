@@ -5,12 +5,12 @@ import * as Icons from 'lucide-react';
 
 const Interventions = () => {
   return (
-    <section id="interventions" className="bg-white">
+    <section id="interventions" className="bg-brand-blue text-white">
       <div className="section-padding">
         <div className="text-center mb-20">
           <h2 className="text-4xl md:text-5xl font-bold mb-6">Nos Domaines d'Intervention</h2>
           <div className="w-20 h-1.5 bg-brand-primary mx-auto rounded-full mb-8"></div>
-          <p className="text-gray-600 max-w-2xl mx-auto text-lg">
+          <p className="text-gray-300 max-w-2xl mx-auto text-lg">
             Nous intervenons de manière holistique pour répondre aux besoins fondamentaux des populations les plus vulnérables en RDC.
           </p>
         </div>
@@ -25,18 +25,18 @@ const Interventions = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
-                className="group p-8 rounded-3xl border border-gray-100 bg-gray-50 hover:bg-white hover:shadow-2xl hover:shadow-brand-primary/10 transition-all duration-500"
+                className="group p-8 rounded-3xl border border-white/10 bg-white/5 hover:bg-white/10 hover:shadow-2xl hover:shadow-brand-primary/10 transition-all duration-500"
               >
-                <div className="w-16 h-16 bg-brand-blue/10 rounded-2xl flex items-center justify-center text-brand-blue mb-8 group-hover:scale-110 group-hover:bg-brand-blue group-hover:text-white transition-all duration-500">
+                <div className="w-16 h-16 bg-brand-primary/20 rounded-2xl flex items-center justify-center text-brand-primary mb-8 group-hover:scale-110 group-hover:bg-brand-primary group-hover:text-white transition-all duration-500">
                   {IconComponent && <IconComponent size={32} />}
                 </div>
-                <h3 className="text-2xl font-bold mb-4 group-hover:text-brand-blue transition-colors">{area.title}</h3>
-                <p className="text-gray-600 mb-8 leading-relaxed">
+                <h3 className="text-2xl font-bold mb-4 group-hover:text-brand-primary transition-colors">{area.title}</h3>
+                <p className="text-gray-300 mb-8 leading-relaxed">
                   {area.description}
                 </p>
                 <ul className="space-y-3">
                   {area.details.map((detail, i) => (
-                    <li key={i} className="flex gap-3 text-sm text-gray-500">
+                    <li key={i} className="flex gap-3 text-sm text-gray-400">
                       <div className="mt-1.5 w-1.5 h-1.5 rounded-full bg-brand-primary shrink-0"></div>
                       {detail}
                     </li>

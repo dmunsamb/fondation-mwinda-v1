@@ -30,7 +30,7 @@ const Contact = () => {
                 </div>
                 <div>
                   <h4 className="font-bold text-xl mb-1 text-brand-dark">Siège Social</h4>
-                  <p className="text-gray-500">Zone de santé de Bipemba, Mbuji-Mayi, RDC</p>
+                  <p className="text-gray-500">Kinshasa, BADARA II, N’sele</p>
                 </div>
               </div>
               <div className="flex gap-6 group">

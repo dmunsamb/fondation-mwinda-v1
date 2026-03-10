@@ -52,7 +52,7 @@ export const Navbar = () => {
               {link.name}
             </Link>
           ))}
-          <Link to="/contact" className="bg-brand-blue text-white px-6 py-2 rounded-full text-sm font-semibold hover:bg-blue-700 transition-colors flex items-center gap-2 shadow-sm shadow-brand-blue/20">
+          <Link to="/soutenez-nous#faire-un-don" className="bg-brand-blue text-white px-6 py-2 rounded-full text-sm font-semibold hover:bg-brand-dark transition-colors flex items-center gap-2 shadow-sm shadow-brand-blue/20">
             <Heart size={16} />
             Faire un don
           </Link>
@@ -83,7 +83,7 @@ export const Navbar = () => {
                 {link.name}
               </Link>
             ))}
-            <Link to="/contact" onClick={() => setIsOpen(false)} className="bg-brand-blue text-white px-6 py-3 rounded-full text-lg font-semibold flex items-center justify-center gap-2 shadow-lg shadow-brand-blue/20">
+            <Link to="/soutenez-nous#faire-un-don" onClick={() => setIsOpen(false)} className="bg-brand-blue text-white px-6 py-3 rounded-full text-lg font-semibold flex items-center justify-center gap-2 shadow-lg shadow-brand-blue/20">
               <Heart size={20} />
               Faire un don
             </Link>
@@ -138,17 +138,27 @@ export const Footer = () => {
             <li><Link to="/" className="hover:text-brand-primary transition-colors">Accueil</Link></li>
             <li><Link to="/about" className="hover:text-brand-primary transition-colors">À Propos</Link></li>
             <li><Link to="/projects" className="hover:text-brand-primary transition-colors">Projets</Link></li>
-            <li><a href="https://www.youtube.com/channel/UCwvOgJjt7TQkwnp6roZwgbQ" target="_blank" rel="noopener noreferrer" className="hover:text-brand-primary transition-colors">YouTube</a></li>
+            <li><Link to="/blog" className="hover:text-brand-primary transition-colors">Blog</Link></li>
+            <li><Link to="/events" className="hover:text-brand-primary transition-colors">Événements</Link></li>
+            <li><Link to="/soutenez-nous" className="hover:text-brand-primary transition-colors">Soutenez-nous</Link></li>
           </ul>
         </div>
         
         <div>
           <h4 className="font-display text-lg font-bold mb-6">Contact</h4>
           <ul className="space-y-4 text-gray-400">
-            <li className="flex items-center gap-3"><MapPin size={18} className="text-brand-primary" /> Mbuji-Mayi, RDC</li>
-            <li className="flex items-center gap-3"><MapPin size={18} className="text-brand-primary" /> Kinshasa, RDC</li>
-            <li className="flex items-center gap-3"><Phone size={18} className="text-brand-primary" /> +243 812 345 678</li>
-            <li className="flex items-center gap-3"><Mail size={18} className="text-brand-primary" /> contact@fondationmwinda.com</li>
+            <li className="flex items-start gap-3">
+              <MapPin size={18} className="text-brand-primary mt-1 shrink-0" /> 
+              <span>Kinshasa, BADARA II, N’sele</span>
+            </li>
+            <li className="flex items-center gap-3">
+              <Phone size={18} className="text-brand-primary" /> 
+              <span>+243 821 142 302</span>
+            </li>
+            <li className="flex items-center gap-3">
+              <Mail size={18} className="text-brand-primary" /> 
+              <span>contact@fondationmwinda.com</span>
+            </li>
           </ul>
         </div>
       </div>

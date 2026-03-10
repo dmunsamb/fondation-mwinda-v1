@@ -5,7 +5,7 @@ import { MapPin, Clock, ArrowUpRight } from 'lucide-react';
 
 const Projects = () => {
   return (
-    <section id="projects" className="bg-brand-light">
+    <section id="projects" className="bg-white">
       <div className="section-padding">
         <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-8">
           <div className="max-w-2xl">
@@ -27,7 +27,7 @@ const Projects = () => {
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.1 }}
-              className="bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all group"
+              className="bg-gray-50 border border-gray-100 rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all group"
             >
               <div className="h-48 bg-gray-200 relative overflow-hidden">
                 <img 

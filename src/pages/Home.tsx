@@ -1,11 +1,21 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import Hero from '../components/Hero';
 import { motion } from 'motion/react';
-import { INTERVENTION_AREAS, EVENTS } from '../constants';
+import { INTERVENTION_AREAS, EVENTS, PROJECTS, BLOG_POSTS } from '../constants';
 import * as Icons from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const Home = () => {
+  const scrollRef = useRef<HTMLDivElement>(null);
+
+  const scroll = (direction: 'left' | 'right') => {
+    if (scrollRef.current) {
+      const { scrollLeft, clientWidth } = scrollRef.current;
+      const scrollTo = direction === 'left' ? scrollLeft - clientWidth : scrollLeft + clientWidth;
+      scrollRef.current.scrollTo({ left: scrollTo, behavior: 'smooth' });
+    }
+  };
+
   return (
     <div className="overflow-hidden">
       <Hero />
@@ -110,12 +120,12 @@ const Home = () => {
       </section>
 
       {/* YouTube Presentation Section - Dark & Immersive */}
-      <section className="relative py-32 px-6 bg-brand-dark overflow-hidden">
+      <section className="relative py-32 px-6 bg-brand-blue overflow-hidden">
         <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-5"></div>
-        <div className="absolute inset-0 bg-gradient-to-br from-brand-blue/20 to-transparent pointer-events-none"></div>
+        <div className="absolute inset-0 bg-gradient-to-br from-brand-dark/20 to-transparent pointer-events-none"></div>
         
         <div className="relative max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center mb-24">
             <motion.div
               initial={{ opacity: 0, x: -30 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -151,7 +161,7 @@ const Home = () => {
               <div className="absolute inset-0 bg-brand-blue/20 group-hover:bg-transparent transition-colors duration-500 pointer-events-none z-10"></div>
               <iframe 
                 className="w-full h-full"
-                src="https://www.youtube.com/watch?v=fcGI_GIJy5Y" 
+                src="https://www.youtube.com/embed/8mWVrey1xa0?si=rEuNVKmhYqnpPBaG" 
                 title="Fondation Mwinda Presentation"
                 frameBorder="0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
@@ -160,18 +170,115 @@ const Home = () => {
               ></iframe>
             </motion.div>
           </div>
+
+          {/* New Project Listing */}
+          <div>
+            <div className="flex items-center justify-between mb-10">
+              <h3 className="text-3xl font-bold text-white">Nos Projets Récents</h3>
+              <Link to="/projects" className="text-brand-primary hover:text-white transition-colors font-bold flex items-center gap-2">
+                Voir tous les projets <Icons.ArrowRight size={18} />
+              </Link>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              {PROJECTS.slice(0, 3).map((project, index) => (
+                <motion.div 
+                  key={project.id}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.1 }}
+                  className="bg-white/5 border border-white/10 rounded-3xl overflow-hidden group hover:bg-white/10 transition-colors"
+                >
+                  <div className="aspect-video overflow-hidden relative">
+                    <img 
+                      src={project.image} 
+                      alt={project.title} 
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                      referrerPolicy="no-referrer"
+                    />
+                    <div className="absolute top-4 right-4 bg-brand-primary text-white text-xs font-bold px-3 py-1 rounded-full">
+                      {project.status}
+                    </div>
+                  </div>
+                  <div className="p-6">
+                    <h4 className="text-xl font-bold text-white mb-3 line-clamp-2">{project.title}</h4>
+                    <Link to={`/projects`} className="inline-flex items-center gap-2 text-brand-primary font-bold group-hover:text-white transition-colors">
+                      Détails du projet <Icons.ArrowRight size={16} />
+                    </Link>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Comment s'impliquer Section */}
+      <section className="py-24 px-6 bg-white text-brand-dark relative overflow-hidden">
+        <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-[0.03]"></div>
+        <div className="max-w-7xl mx-auto relative z-10">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-bold mb-6">Comment s'impliquer ?</h2>
+            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+              Rejoignez le mouvement et aidez-nous à faire la différence. Chaque action compte.
+            </p>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <motion.div 
+              whileHover={{ y: -10 }}
+              className="bg-gray-50 border border-gray-100 p-8 rounded-[2rem] text-center shadow-sm hover:shadow-xl transition-all"
+            >
+              <div className="w-16 h-16 bg-brand-blue/10 text-brand-blue rounded-full flex items-center justify-center mx-auto mb-6">
+                <Icons.Heart size={32} />
+              </div>
+              <h3 className="text-2xl font-bold mb-4">Faire un don</h3>
+              <p className="text-gray-600 mb-8">Votre soutien financier nous permet de concrétiser nos projets sur le terrain.</p>
+              <Link to="/soutenez-nous#faire-un-don" className="inline-block bg-brand-blue text-white px-8 py-3 rounded-full font-bold hover:bg-brand-dark transition-colors">
+                Soutenir
+              </Link>
+            </motion.div>
+
+            <motion.div 
+              whileHover={{ y: -10 }}
+              className="bg-gray-50 border border-gray-100 p-8 rounded-[2rem] text-center shadow-sm hover:shadow-xl transition-all"
+            >
+              <div className="w-16 h-16 bg-brand-blue/10 text-brand-blue rounded-full flex items-center justify-center mx-auto mb-6">
+                <Icons.Users size={32} />
+              </div>
+              <h3 className="text-2xl font-bold mb-4">Devenir bénévole</h3>
+              <p className="text-gray-600 mb-8">Mettez vos compétences au service de notre cause et vivez une expérience humaine unique.</p>
+              <Link to="/soutenez-nous#devenir-benevole" className="inline-block bg-brand-blue text-white px-8 py-3 rounded-full font-bold hover:bg-brand-dark transition-colors">
+                Rejoindre
+              </Link>
+            </motion.div>
+
+            <motion.div 
+              whileHover={{ y: -10 }}
+              className="bg-gray-50 border border-gray-100 p-8 rounded-[2rem] text-center shadow-sm hover:shadow-xl transition-all"
+            >
+              <div className="w-16 h-16 bg-brand-blue/10 text-brand-blue rounded-full flex items-center justify-center mx-auto mb-6">
+                <Icons.Handshake size={32} />
+              </div>
+              <h3 className="text-2xl font-bold mb-4">Devenir partenaire</h3>
+              <p className="text-gray-600 mb-8">Associez votre entreprise ou organisation à nos actions pour un impact à grande échelle.</p>
+              <Link to="/soutenez-nous#devenir-partenaire" className="inline-block bg-brand-blue text-white px-8 py-3 rounded-full font-bold hover:bg-brand-dark transition-colors">
+                Collaborer
+              </Link>
+            </motion.div>
+          </div>
         </div>
       </section>
 
       {/* Events Calendar Section - Clean & Modern */}
-      <section className="py-24 px-6 bg-brand-light relative">
+      <section className="py-24 px-6 bg-brand-blue text-white relative">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-20">
-            <h2 className="text-4xl md:text-5xl font-bold mb-6 text-brand-dark">Calendrier des Événements</h2>
-            <p className="text-gray-500 text-lg max-w-2xl mx-auto">Rejoignez-nous lors de nos prochaines activités et événements culturels pour soutenir nos actions.</p>
+            <h2 className="text-4xl md:text-5xl font-bold mb-6 text-white">Calendrier des Événements</h2>
+            <p className="text-gray-300 text-lg max-w-2xl mx-auto">Rejoignez-nous lors de nos prochaines activités et événements culturels pour soutenir nos actions.</p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {EVENTS.map((event, index) => (
               <motion.div 
                 key={event.id}
@@ -180,25 +287,25 @@ const Home = () => {
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
                 whileHover={{ y: -10 }}
-                className="bg-white p-8 rounded-[2rem] shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100 group relative overflow-hidden"
+                className="bg-white/5 p-8 rounded-[2rem] shadow-sm hover:shadow-xl transition-all duration-300 border border-white/10 group relative overflow-hidden"
               >
-                <div className="absolute top-0 left-0 w-2 h-full bg-brand-blue/0 group-hover:bg-brand-blue transition-all duration-300"></div>
+                <div className="absolute top-0 left-0 w-2 h-full bg-brand-primary/0 group-hover:bg-brand-primary transition-all duration-300"></div>
                 
-                <div className="flex items-center gap-3 text-brand-blue font-bold mb-6 bg-brand-blue/5 w-fit px-4 py-2 rounded-full">
+                <div className="flex items-center gap-3 text-white font-bold mb-6 bg-white/10 w-fit px-4 py-2 rounded-full">
                   <Icons.Calendar size={18} /> {event.date}
                 </div>
                 
-                <h3 className="text-2xl font-bold mb-4 text-brand-dark group-hover:text-brand-blue transition-colors">{event.title}</h3>
+                <h3 className="text-2xl font-bold mb-4 text-white group-hover:text-brand-primary transition-colors">{event.title}</h3>
                 
-                <div className="flex items-center gap-2 text-gray-500 text-sm mb-6">
+                <div className="flex items-center gap-2 text-gray-300 text-sm mb-6">
                   <Icons.MapPin size={16} className="text-brand-primary" /> {event.location}
                 </div>
                 
-                <p className="text-gray-600 leading-relaxed mb-6">
+                <p className="text-gray-400 leading-relaxed mb-6">
                   {event.description}
                 </p>
 
-                <div className="w-10 h-10 rounded-full bg-gray-50 flex items-center justify-center group-hover:bg-brand-blue group-hover:text-white transition-all ml-auto">
+                <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center group-hover:bg-brand-primary group-hover:text-white transition-all ml-auto">
                   <Icons.ArrowUpRight size={20} />
                 </div>
               </motion.div>
@@ -210,39 +317,104 @@ const Home = () => {
       {/* Interventions Preview - Cards with Hover Effects */}
       <section className="py-24 px-6 bg-white">
         <div className="max-w-7xl mx-auto">
-          <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
-            <div>
-              <h2 className="text-4xl font-bold mb-4 text-brand-dark">Domaines d'Action</h2>
-              <p className="text-gray-600 text-lg">Un impact réel et mesurable sur le terrain.</p>
-            </div>
-            <Link to="/about" className="px-8 py-3 rounded-full border border-gray-200 font-bold hover:bg-brand-dark hover:text-white hover:border-brand-dark transition-all">
-              Voir tous les domaines
-            </Link>
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold mb-4 text-brand-dark">Domaines d'Action</h2>
+            <p className="text-gray-600 text-lg">Un impact réel et mesurable sur le terrain.</p>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {INTERVENTION_AREAS.slice(0, 3).map((area, index) => {
-              const IconComponent = (Icons as any)[area.icon];
-              return (
-                <motion.div 
-                  key={area.id} 
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.1 }}
-                  className="bg-brand-light p-10 rounded-[2.5rem] hover:bg-brand-blue hover:text-white transition-all duration-500 group"
-                >
-                  <div className="w-16 h-16 bg-white rounded-2xl flex items-center justify-center text-brand-dark mb-8 shadow-sm group-hover:scale-110 transition-transform duration-500">
-                    {IconComponent && <IconComponent size={32} />}
-                  </div>
-                  <h3 className="text-2xl font-bold mb-4">{area.title}</h3>
-                  <p className="text-gray-500 mb-8 group-hover:text-blue-100 transition-colors leading-relaxed">{area.description}</p>
-                  <Link to="/about" className="inline-flex items-center gap-2 font-bold group-hover:gap-3 transition-all">
-                    Détails <Icons.ArrowRight size={18} />
+          <div className="relative group">
+            <div 
+              ref={scrollRef}
+              className="flex overflow-x-auto snap-x snap-mandatory gap-8 pb-8 hide-scrollbar scroll-smooth"
+              style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+            >
+              {INTERVENTION_AREAS.map((area, index) => {
+                const IconComponent = (Icons as any)[area.icon];
+                return (
+                  <motion.div 
+                    key={area.id} 
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: index * 0.1 }}
+                    className="min-w-[300px] md:min-w-[350px] snap-center bg-gray-50 border border-gray-100 p-10 rounded-[2.5rem] hover:bg-brand-blue hover:text-white transition-all duration-500 group/card"
+                  >
+                    <div className="w-16 h-16 bg-white rounded-2xl flex items-center justify-center text-brand-dark mb-8 shadow-sm group-hover/card:scale-110 transition-transform duration-500">
+                      {IconComponent && <IconComponent size={32} />}
+                    </div>
+                    <h3 className="text-2xl font-bold mb-4">{area.title}</h3>
+                    <p className="text-gray-600 group-hover/card:text-blue-100 transition-colors leading-relaxed">{area.description}</p>
+                  </motion.div>
+                );
+              })}
+            </div>
+            
+            {/* Navigation Arrows */}
+            <button 
+              onClick={() => scroll('left')}
+              className="absolute top-1/2 -translate-y-1/2 -left-4 md:-left-6 w-12 h-12 bg-white/90 rounded-full flex items-center justify-center shadow-lg text-brand-dark opacity-50 hover:opacity-100 transition-opacity z-10"
+              aria-label="Précédent"
+            >
+              <Icons.ChevronLeft size={24} />
+            </button>
+            <button 
+              onClick={() => scroll('right')}
+              className="absolute top-1/2 -translate-y-1/2 -right-4 md:-right-6 w-12 h-12 bg-white/90 rounded-full flex items-center justify-center shadow-lg text-brand-dark opacity-50 hover:opacity-100 transition-opacity z-10"
+              aria-label="Suivant"
+            >
+              <Icons.ChevronRight size={24} />
+            </button>
+          </div>
+
+          <div className="text-center mt-8">
+            <Link to="/about" className="inline-flex items-center gap-2 bg-brand-blue text-white px-8 py-4 rounded-full font-bold hover:bg-brand-dark transition-colors">
+              Découvrir tous nos domaines d'action <Icons.ArrowRight size={18} />
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Blog Section */}
+      <section className="py-24 px-6 bg-brand-blue text-white">
+        <div className="max-w-7xl mx-auto">
+          <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
+            <div>
+              <h2 className="text-4xl font-bold mb-4 text-white">Derniers Articles</h2>
+              <p className="text-gray-300 text-lg">Suivez l'actualité de la Fondation Mwinda.</p>
+            </div>
+            <Link to="/blog" className="px-8 py-3 rounded-full border border-white/20 text-white font-bold hover:bg-white hover:text-brand-blue transition-all">
+              Voir tout le blog
+            </Link>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {BLOG_POSTS.slice(0, 2).map((post, index) => (
+              <motion.div 
+                key={post.id}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1 }}
+                className="bg-white/5 border border-white/10 rounded-[2rem] overflow-hidden group flex flex-col"
+              >
+                <div className="aspect-[16/9] overflow-hidden">
+                  <img 
+                    src={post.image} 
+                    alt={post.title} 
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    referrerPolicy="no-referrer"
+                  />
+                </div>
+                <div className="p-8 flex-grow flex flex-col">
+                  <div className="text-brand-primary font-bold text-sm mb-3">{new Date(post.date).toLocaleDateString('fr-FR', { year: 'numeric', month: 'long', day: 'numeric' })}</div>
+                  <h3 className="text-2xl font-bold text-white mb-4 group-hover:text-brand-primary transition-colors">{post.title}</h3>
+                  <p className="text-gray-400 mb-6 line-clamp-3 flex-grow">{post.excerpt}</p>
+                  <Link to="/blog" className="inline-flex items-center gap-2 text-white font-bold hover:text-brand-primary transition-colors mt-auto">
+                    Lire la suite <Icons.ArrowRight size={18} />
                   </Link>
-                </motion.div>
-              );
-            })}
+                </div>
+              </motion.div>
+            ))}
           </div>
         </div>
       </section>

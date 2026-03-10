@@ -63,7 +63,7 @@ const Hero = () => {
                 </span>
               </Link>
               
-              <Link to="/contact" className="group px-8 py-4 bg-white/5 backdrop-blur-sm border border-white/10 text-white rounded-full font-bold hover:bg-white/10 transition-all flex items-center gap-2">
+              <Link to="/soutenez-nous#faire-un-don" className="group px-8 py-4 bg-white/5 backdrop-blur-sm border border-white/10 text-white rounded-full font-bold hover:bg-white/10 transition-all flex items-center gap-2">
                 <Heart size={20} className="text-brand-primary group-hover:scale-110 transition-transform" />
                 <span>Faire un don</span>
               </Link>
