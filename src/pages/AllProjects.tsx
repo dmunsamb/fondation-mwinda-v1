@@ -10,7 +10,7 @@ const statusColors: Record<string, string> = {
   'Planifié': 'bg-blue-100 text-blue-700',
 };
 
-const ProjectCard = ({ project, index }: { project: any; index: number }) => (
+const ProjectCard = ({ project, index }: { project: any; index: number; key?: string }) => (
   <motion.div
     initial={{ opacity: 0, y: 20 }}
     whileInView={{ opacity: 1, scale: 1, y: 0 }}

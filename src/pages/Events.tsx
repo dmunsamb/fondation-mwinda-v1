@@ -5,7 +5,7 @@ import { Calendar, MapPin, X, Clock, CheckCircle } from 'lucide-react';
 
 const FOM_LOGO_FALLBACK = '/images/fom-logo-vertical.webp';
 
-const EventRow = ({ event, index }: { event: any; index: number }) => {
+const EventRow = ({ event, index }: { event: any; index: number; key?: string }) => {
   const [zoomed, setZoomed] = useState(false);
 
   return (
@@ -164,9 +164,22 @@ const Events = () => {
               <span className="text-gray-400 text-sm">{past.length} evenement{past.length > 1 ? 's' : ''}</span>
             </div>
             <div className="space-y-4">
-              {past.map((event, i) => (
-                <EventRow key={event.id} event={event} index={i} />
-              ))}
+              {past.map((event, i) => {
+                const year = event.date.trim().split(' ').pop();
+                const prevYear = i > 0 ? past[i - 1].date.trim().split(' ').pop() : null;
+                const showYear = year !== prevYear;
+                return (
+                  <React.Fragment key={event.id}>
+                    {showYear && (
+                      <div className="flex items-center gap-4 pt-4 pb-2">
+                        <div className="text-3xl font-black text-brand-dark/10 tracking-tight select-none">{year}</div>
+                        <div className="h-px bg-gray-100 flex-grow"></div>
+                      </div>
+                    )}
+                    <EventRow event={event} index={i} />
+                  </React.Fragment>
+                );
+              })}
             </div>
           </div>
         )}

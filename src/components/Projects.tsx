@@ -31,8 +31,8 @@ const Projects = () => {
               className="bg-gray-50 border border-gray-100 rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all group"
             >
               <div className="h-48 bg-gray-200 relative overflow-hidden">
-                <img 
-                  src={`https://picsum.photos/seed/human-${project.id}/600/400`} 
+                <img
+                  src={project.image}
                   alt={project.title}
                   className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                   referrerPolicy="no-referrer"

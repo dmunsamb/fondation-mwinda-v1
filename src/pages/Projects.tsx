@@ -91,8 +91,8 @@ const ProjectsPage = () => {
             >
               <div className="absolute -inset-4 bg-gradient-to-r from-brand-primary to-brand-blue rounded-[2.5rem] opacity-10 blur-lg"></div>
               <img 
-                src="https://picsum.photos/seed/construction/800/600" 
-                alt="Chantier Lualaba" 
+                src="/images/projects/orphelinat-lualaba.webp"
+                alt="Chantier Lualaba"
                 className="relative rounded-[2rem] shadow-2xl border border-gray-100 w-full"
                 referrerPolicy="no-referrer"
                 loading="lazy"

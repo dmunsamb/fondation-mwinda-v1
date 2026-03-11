@@ -1,15 +1,11 @@
-import React, { useRef, useState } from 'react';
-import { AnimatePresence } from 'motion/react';
+import React, { useRef } from 'react';
 import Hero from '../components/Hero';
 import { motion } from 'motion/react';
 import { INTERVENTION_AREAS, EVENTS, PROJECTS, BLOG_POSTS } from '../constants';
 import * as Icons from 'lucide-react';
 import { Link } from 'react-router-dom';
 
-const FOM_LOGO_FALLBACK = '/images/fom-logo-vertical.webp';
-
 const HomeEventsSection = () => {
-  const [zoomedEvent, setZoomedEvent] = useState<any>(null);
   const upcoming = EVENTS.filter((e: any) => e.status === 'upcoming');
 
   return (
@@ -20,7 +16,7 @@ const HomeEventsSection = () => {
           <p className="text-gray-300 text-lg max-w-2xl mx-auto">Rejoignez-nous lors de nos prochaines activites et evenements culturels.</p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-5">
           {upcoming.map((event: any, index: number) => (
             <motion.div
               key={event.id}
@@ -28,31 +24,22 @@ const HomeEventsSection = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.08 }}
-              className="rounded-2xl overflow-hidden border border-white/10 group cursor-pointer relative"
-              style={{ aspectRatio: '4/5' }}
-              onClick={() => setZoomedEvent(event)}
+              className="rounded-2xl border border-white/15 bg-white/8 backdrop-blur-sm p-6 flex flex-col gap-3 hover:bg-white/15 transition-colors"
             >
-              {/* Flyer image */}
-              <img
-                src={event.flyer || FOM_LOGO_FALLBACK}
-                alt={event.title}
-                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                loading="lazy"
-              />
-              {/* Overlay on hover */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4">
-                <div className="flex items-center gap-1.5 text-brand-primary text-xs font-bold mb-1">
-                  <Icons.Calendar size={12} /> {event.date}
-                </div>
-                <p className="text-white font-bold text-sm leading-snug mb-1">{event.title}</p>
-                <div className="flex items-center gap-1 text-gray-300 text-xs">
-                  <Icons.MapPin size={11} /> {event.location}
-                </div>
-              </div>
-              {/* Always-visible subtle date badge */}
-              <div className="absolute top-3 left-3 bg-black/50 backdrop-blur-sm text-white text-xs font-bold px-2 py-1 rounded-full opacity-80 group-hover:opacity-0 transition-opacity">
+              {/* Date badge */}
+              <div className="inline-flex items-center gap-1.5 bg-brand-primary/20 text-brand-primary text-xs font-bold px-3 py-1.5 rounded-full self-start">
+                <Icons.Calendar size={12} />
                 {event.date}
               </div>
+              {/* Title */}
+              <h3 className="text-white font-bold text-base leading-snug">{event.title}</h3>
+              {/* Location */}
+              <div className="flex items-center gap-1.5 text-gray-300 text-sm">
+                <Icons.MapPin size={13} className="shrink-0 text-brand-primary" />
+                <span>{event.location}</span>
+              </div>
+              {/* Description */}
+              <p className="text-gray-400 text-sm leading-relaxed line-clamp-3 flex-grow">{event.description}</p>
             </motion.div>
           ))}
         </div>
@@ -66,46 +53,6 @@ const HomeEventsSection = () => {
           </Link>
         </div>
       </div>
-
-      {/* Fullscreen lightbox */}
-      <AnimatePresence>
-        {zoomedEvent && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 bg-black/90 flex items-center justify-center p-4"
-            onClick={() => setZoomedEvent(null)}
-          >
-            <motion.div
-              initial={{ scale: 0.85, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.85, opacity: 0 }}
-              transition={{ type: 'spring', stiffness: 280, damping: 24 }}
-              className="relative flex flex-col items-center"
-              style={{ maxHeight: '95vh' }}
-              onClick={(e) => e.stopPropagation()}
-            >
-              <button
-                onClick={() => setZoomedEvent(null)}
-                className="absolute -top-3 -right-3 z-10 w-9 h-9 bg-white rounded-full flex items-center justify-center shadow-lg hover:bg-gray-100 transition-colors"
-              >
-                <Icons.X size={18} />
-              </button>
-              <img
-                src={zoomedEvent.flyer || FOM_LOGO_FALLBACK}
-                alt={zoomedEvent.title}
-                className="rounded-2xl shadow-2xl object-contain"
-                style={{ maxHeight: '85vh', maxWidth: '90vw' }}
-              />
-              <div className="mt-3 text-center text-white">
-                <p className="font-bold">{zoomedEvent.title}</p>
-                <p className="text-sm text-gray-400">{zoomedEvent.date} — {zoomedEvent.location}</p>
-              </div>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
     </section>
   );
 };
