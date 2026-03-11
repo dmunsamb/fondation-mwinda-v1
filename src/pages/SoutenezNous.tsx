@@ -97,6 +97,19 @@ const SoutenezNous = () => {
                 </ul>
               </li>
               <li>Pour soutenir notre action 10$ Goma, veuillez mettre la communication : <Link to="/contact" className="text-brand-primary font-bold hover:underline">« JE SUIS GOMA »</Link></li>
+              <li>
+                Pour soutenir un <strong>projet ou une action spécifique</strong> de la Fondation Mwinda, veuillez indiquer le nom du projet ou de l'action dans la communication de votre virement ou de votre paiement PayPal.
+                <div className="mt-4 ml-2 bg-white border border-gray-200 rounded-2xl p-5 flex items-start gap-4">
+                  <div className="w-10 h-10 bg-brand-primary/10 rounded-xl flex items-center justify-center text-brand-primary shrink-0 mt-0.5">
+                    <CreditCard size={20} />
+                  </div>
+                  <div>
+                    <p className="text-sm font-bold text-brand-dark mb-1">Exemple de communication</p>
+                    <p className="text-sm text-gray-500">« Don — <span className="italic text-brand-primary">[Nom du projet ou de l'action]</span> »</p>
+                    <p className="text-sm text-gray-400 mt-2">Ex : « Don — Construction orphelinat Lualaba » ou « Don — Éducation Uvira »</p>
+                  </div>
+                </div>
+              </li>
             </ol>
             
             <div className="bg-brand-light p-6 rounded-xl flex items-center gap-4 border border-gray-200">

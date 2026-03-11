@@ -1,6 +1,6 @@
 import React from 'react';
 import ContactComponent from '../components/Contact';
-import { MapPin, Phone, Building2 } from 'lucide-react';
+import { MapPin, Phone, Building2, Mail, User } from 'lucide-react';
 import { motion } from 'motion/react';
 
 const ContactPage = () => {
@@ -21,7 +21,7 @@ const ContactPage = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 justify-center max-w-4xl mx-auto">
             {[
               { city: 'Kinshasa', address: 'BADARA II, N’sele', phone: '+243 821 142 302', type: 'Siège Social' },
-              { city: 'Lubumbashi', address: 'Centre-ville, Lubumbashi', phone: '+243 845 678 901', type: 'Antenne Régionale' },
+              { city: 'Mbuji-Mayi', address: 'Mbuji-Mayi, Kasaï-Oriental', phone: '+243 897 742 007', email: 'mbuji-mayi@fondationmwinda.com', rep: 'Henry Lumbu', type: 'Antenne Régionale' },
             ].map((loc, i) => (
               <motion.div 
                 key={i} 
@@ -50,6 +50,18 @@ const ContactPage = () => {
                     <Phone size={18} className="text-brand-primary shrink-0" />
                     <p className="font-bold text-white">{loc.phone}</p>
                   </div>
+                  {loc.email && (
+                    <div className="flex items-center gap-3 text-gray-400">
+                      <Mail size={18} className="text-brand-primary shrink-0" />
+                      <p>{loc.email}</p>
+                    </div>
+                  )}
+                  {loc.rep && (
+                    <div className="flex items-center gap-3 text-gray-400">
+                      <User size={18} className="text-brand-primary shrink-0" />
+                      <p>{loc.rep}</p>
+                    </div>
+                  )}
                 </div>
               </motion.div>
             ))}

@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'motion/react';
+import { Link } from 'react-router-dom';
 import { PROJECTS } from '../constants';
 import { MapPin, Clock, ArrowUpRight } from 'lucide-react';
 
@@ -14,13 +15,13 @@ const Projects = () => {
               Découvrez nos initiatives actuelles sur le terrain, visant à apporter des solutions durables aux défis humanitaires.
             </p>
           </div>
-          <button className="text-brand-primary font-bold flex items-center gap-2 hover:gap-3 transition-all">
+          <Link to="/all-projects" className="text-brand-primary font-bold flex items-center gap-2 hover:gap-3 transition-all shrink-0">
             Voir tous les projets <ArrowUpRight size={20} />
-          </button>
+          </Link>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {PROJECTS.map((project, index) => (
+          {PROJECTS.filter(p => p.status === 'En cours').map((project, index) => (
             <motion.div
               key={project.id}
               initial={{ opacity: 0, scale: 0.95 }}
@@ -51,9 +52,9 @@ const Projects = () => {
                 <p className="text-gray-500 text-sm leading-relaxed mb-6">
                   {project.description}
                 </p>
-                <button className="w-full py-3 border border-gray-100 rounded-xl text-sm font-bold hover:bg-brand-blue hover:text-white hover:border-brand-blue hover:shadow-lg hover:shadow-brand-blue/20 transition-all duration-300">
+                <Link to={`/projects/${project.id}`} className="block w-full py-3 border border-gray-100 rounded-xl text-sm font-bold text-center hover:bg-brand-blue hover:text-white hover:border-brand-blue hover:shadow-lg hover:shadow-brand-blue/20 transition-all duration-300">
                   En savoir plus
-                </button>
+                </Link>
               </div>
             </motion.div>
           ))}

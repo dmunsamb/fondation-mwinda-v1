@@ -1,9 +1,114 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
+import { AnimatePresence } from 'motion/react';
 import Hero from '../components/Hero';
 import { motion } from 'motion/react';
 import { INTERVENTION_AREAS, EVENTS, PROJECTS, BLOG_POSTS } from '../constants';
 import * as Icons from 'lucide-react';
 import { Link } from 'react-router-dom';
+
+const FOM_LOGO_FALLBACK = '/images/fom-logo-vertical.webp';
+
+const HomeEventsSection = () => {
+  const [zoomedEvent, setZoomedEvent] = useState<any>(null);
+  const upcoming = EVENTS.filter((e: any) => e.status === 'upcoming');
+
+  return (
+    <section className="py-24 px-6 bg-brand-blue text-white relative">
+      <div className="max-w-7xl mx-auto">
+        <div className="text-center mb-16">
+          <h2 className="text-4xl md:text-5xl font-bold mb-4 text-white">Calendrier des Evenements</h2>
+          <p className="text-gray-300 text-lg max-w-2xl mx-auto">Rejoignez-nous lors de nos prochaines activites et evenements culturels.</p>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6">
+          {upcoming.map((event: any, index: number) => (
+            <motion.div
+              key={event.id}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: index * 0.08 }}
+              className="rounded-2xl overflow-hidden border border-white/10 group cursor-pointer relative"
+              style={{ aspectRatio: '4/5' }}
+              onClick={() => setZoomedEvent(event)}
+            >
+              {/* Flyer image */}
+              <img
+                src={event.flyer || FOM_LOGO_FALLBACK}
+                alt={event.title}
+                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                loading="lazy"
+              />
+              {/* Overlay on hover */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4">
+                <div className="flex items-center gap-1.5 text-brand-primary text-xs font-bold mb-1">
+                  <Icons.Calendar size={12} /> {event.date}
+                </div>
+                <p className="text-white font-bold text-sm leading-snug mb-1">{event.title}</p>
+                <div className="flex items-center gap-1 text-gray-300 text-xs">
+                  <Icons.MapPin size={11} /> {event.location}
+                </div>
+              </div>
+              {/* Always-visible subtle date badge */}
+              <div className="absolute top-3 left-3 bg-black/50 backdrop-blur-sm text-white text-xs font-bold px-2 py-1 rounded-full opacity-80 group-hover:opacity-0 transition-opacity">
+                {event.date}
+              </div>
+            </motion.div>
+          ))}
+        </div>
+
+        <div className="text-center mt-10">
+          <Link
+            to="/events"
+            className="inline-flex items-center gap-2 text-white/60 hover:text-white text-sm font-medium transition-colors"
+          >
+            Voir tous les evenements <Icons.ArrowRight size={14} />
+          </Link>
+        </div>
+      </div>
+
+      {/* Fullscreen lightbox */}
+      <AnimatePresence>
+        {zoomedEvent && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 bg-black/90 flex items-center justify-center p-4"
+            onClick={() => setZoomedEvent(null)}
+          >
+            <motion.div
+              initial={{ scale: 0.85, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.85, opacity: 0 }}
+              transition={{ type: 'spring', stiffness: 280, damping: 24 }}
+              className="relative flex flex-col items-center"
+              style={{ maxHeight: '95vh' }}
+              onClick={(e) => e.stopPropagation()}
+            >
+              <button
+                onClick={() => setZoomedEvent(null)}
+                className="absolute -top-3 -right-3 z-10 w-9 h-9 bg-white rounded-full flex items-center justify-center shadow-lg hover:bg-gray-100 transition-colors"
+              >
+                <Icons.X size={18} />
+              </button>
+              <img
+                src={zoomedEvent.flyer || FOM_LOGO_FALLBACK}
+                alt={zoomedEvent.title}
+                className="rounded-2xl shadow-2xl object-contain"
+                style={{ maxHeight: '85vh', maxWidth: '90vw' }}
+              />
+              <div className="mt-3 text-center text-white">
+                <p className="font-bold">{zoomedEvent.title}</p>
+                <p className="text-sm text-gray-400">{zoomedEvent.date} — {zoomedEvent.location}</p>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </section>
+  );
+};
 
 const Home = () => {
   const scrollRef = useRef<HTMLDivElement>(null);
@@ -175,12 +280,12 @@ const Home = () => {
           <div>
             <div className="flex items-center justify-between mb-10">
               <h3 className="text-3xl font-bold text-white">Nos Projets Récents</h3>
-              <Link to="/projects" className="text-brand-primary hover:text-white transition-colors font-bold flex items-center gap-2">
+              <Link to="/all-projects" className="text-brand-primary hover:text-white transition-colors font-bold flex items-center gap-2">
                 Voir tous les projets <Icons.ArrowRight size={18} />
               </Link>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              {PROJECTS.slice(0, 3).map((project, index) => (
+              {PROJECTS.filter(p => p.status === 'En cours').slice(0, 3).map((project, index) => (
                 <motion.div 
                   key={project.id}
                   initial={{ opacity: 0, y: 20 }}
@@ -202,7 +307,7 @@ const Home = () => {
                   </div>
                   <div className="p-6">
                     <h4 className="text-xl font-bold text-white mb-3 line-clamp-2">{project.title}</h4>
-                    <Link to={`/projects`} className="inline-flex items-center gap-2 text-brand-primary font-bold group-hover:text-white transition-colors">
+                    <Link to={`/projects/${project.id}`} className="inline-flex items-center gap-2 text-brand-primary font-bold group-hover:text-white transition-colors">
                       Détails du projet <Icons.ArrowRight size={16} />
                     </Link>
                   </div>
@@ -270,49 +375,8 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Events Calendar Section - Clean & Modern */}
-      <section className="py-24 px-6 bg-brand-blue text-white relative">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-20">
-            <h2 className="text-4xl md:text-5xl font-bold mb-6 text-white">Calendrier des Événements</h2>
-            <p className="text-gray-300 text-lg max-w-2xl mx-auto">Rejoignez-nous lors de nos prochaines activités et événements culturels pour soutenir nos actions.</p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {EVENTS.map((event, index) => (
-              <motion.div 
-                key={event.id}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-                whileHover={{ y: -10 }}
-                className="bg-white/5 p-8 rounded-[2rem] shadow-sm hover:shadow-xl transition-all duration-300 border border-white/10 group relative overflow-hidden"
-              >
-                <div className="absolute top-0 left-0 w-2 h-full bg-brand-primary/0 group-hover:bg-brand-primary transition-all duration-300"></div>
-                
-                <div className="flex items-center gap-3 text-white font-bold mb-6 bg-white/10 w-fit px-4 py-2 rounded-full">
-                  <Icons.Calendar size={18} /> {event.date}
-                </div>
-                
-                <h3 className="text-2xl font-bold mb-4 text-white group-hover:text-brand-primary transition-colors">{event.title}</h3>
-                
-                <div className="flex items-center gap-2 text-gray-300 text-sm mb-6">
-                  <Icons.MapPin size={16} className="text-brand-primary" /> {event.location}
-                </div>
-                
-                <p className="text-gray-400 leading-relaxed mb-6">
-                  {event.description}
-                </p>
-
-                <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center group-hover:bg-brand-primary group-hover:text-white transition-all ml-auto">
-                  <Icons.ArrowUpRight size={20} />
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
+      {/* Events Calendar Section */}
+      <HomeEventsSection />
 
       {/* Interventions Preview - Cards with Hover Effects */}
       <section className="py-24 px-6 bg-white">
@@ -407,9 +471,9 @@ const Home = () => {
                 </div>
                 <div className="p-8 flex-grow flex flex-col">
                   <div className="text-brand-primary font-bold text-sm mb-3">{new Date(post.date).toLocaleDateString('fr-FR', { year: 'numeric', month: 'long', day: 'numeric' })}</div>
-                  <h3 className="text-2xl font-bold text-white mb-4 group-hover:text-brand-primary transition-colors">{post.title}</h3>
+                  <Link to={`/blog/${post.id}`} className="text-2xl font-bold text-white mb-4 group-hover:text-brand-primary transition-colors block hover:text-brand-primary">{post.title}</Link>
                   <p className="text-gray-400 mb-6 line-clamp-3 flex-grow">{post.excerpt}</p>
-                  <Link to="/blog" className="inline-flex items-center gap-2 text-white font-bold hover:text-brand-primary transition-colors mt-auto">
+                  <Link to={`/blog/${post.id}`} className="inline-flex items-center gap-2 text-white font-bold hover:text-brand-primary transition-colors mt-auto">
                     Lire la suite <Icons.ArrowRight size={18} />
                   </Link>
                 </div>

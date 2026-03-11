@@ -10,7 +10,10 @@ const Projects = lazy(() => import('./pages/Projects'));
 const Contact = lazy(() => import('./pages/Contact'));
 const SoutenezNous = lazy(() => import('./pages/SoutenezNous'));
 const Blog = lazy(() => import('./pages/Blog'));
+const BlogDetail = lazy(() => import('./pages/BlogDetail'));
 const Events = lazy(() => import('./pages/Events'));
+const ProjectDetail = lazy(() => import('./pages/ProjectDetail'));
+const AllProjects = lazy(() => import('./pages/AllProjects'));
 
 const ScrollToTop = () => {
   const { pathname } = useLocation();
@@ -42,7 +45,10 @@ export default function App() {
               <Route path="/contact" element={<Contact />} />
               <Route path="/soutenez-nous" element={<SoutenezNous />} />
               <Route path="/blog" element={<Blog />} />
+              <Route path="/blog/:id" element={<BlogDetail />} />
               <Route path="/events" element={<Events />} />
+              <Route path="/projects/:id" element={<ProjectDetail />} />
+              <Route path="/all-projects" element={<AllProjects />} />
             </Routes>
           </Suspense>
         </main>

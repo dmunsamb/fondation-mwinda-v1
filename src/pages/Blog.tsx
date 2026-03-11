@@ -47,7 +47,7 @@ const Blog = () => {
                 <div className="text-brand-primary font-bold text-sm mb-3">{new Date(post.date).toLocaleDateString('fr-FR', { year: 'numeric', month: 'long', day: 'numeric' })}</div>
                 <h3 className="text-2xl font-bold text-brand-dark mb-4 group-hover:text-brand-blue transition-colors">{post.title}</h3>
                 <p className="text-gray-600 mb-6 line-clamp-3 flex-grow">{post.excerpt}</p>
-                <Link to={`/blog`} className="inline-flex items-center gap-2 text-brand-dark font-bold hover:text-brand-primary transition-colors mt-auto">
+                <Link to={`/blog/${post.id}`} className="inline-flex items-center gap-2 text-brand-dark font-bold hover:text-brand-primary transition-colors mt-auto">
                   Lire la suite <ArrowRight size={18} />
                 </Link>
               </div>

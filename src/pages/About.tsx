@@ -35,7 +35,7 @@ const About = () => {
               "Nous pensons que le développement d’un pays doit passer par le développement personnel de l’individu."
             </p>
             <p className="text-lg text-gray-600 mb-8 leading-relaxed">
-              La mission de la FOM vise à soutenir le bien-être chez les enfants, les jeunes, et les familles par le renforcement des cinq besoins fondamentaux de l'homme selon la pyramide de Maslow. Nous croyons fermement que chaque individu, s'il est soutenu, peut devenir un acteur du changement pour sa communauté et son économie.
+              La mission de la FOM vise à soutenir le bien-être chez les enfants, les jeunes, et les familles par le renforcement des six besoins fondamentaux de l'homme selon la pyramide de Maslow. Nous croyons fermement que chaque individu, s'il est soutenu, peut devenir un acteur du changement pour sa communauté et son économie.
             </p>
             <p className="text-lg text-gray-600 mb-8 leading-relaxed">
               À travers nos cours, nos ateliers et nos centres de santé, nous offrons les outils nécessaires pour que chacun puisse se développer personnellement et contribuer activement à la société congolaise.
@@ -75,6 +75,13 @@ const About = () => {
                 <div>
                   <h4 className="font-bold text-xl mb-2">Environnement</h4>
                   <p className="text-gray-500">Sensibilisation et actions pour la préservation de notre écosystème.</p>
+                </div>
+              </div>
+              <div className="flex gap-4">
+                <div className="w-12 h-12 bg-brand-blue/10 rounded-full flex items-center justify-center text-brand-blue shrink-0 font-bold">06</div>
+                <div>
+                  <h4 className="font-bold text-xl mb-2">Culture</h4>
+                  <p className="text-gray-500">Renforcer l'identité culturelle à travers l'art et promouvoir les valeurs, patrimoines et art congolais.</p>
                 </div>
               </div>
             </div>

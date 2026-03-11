@@ -3,6 +3,7 @@ import ProjectsComponent from '../components/Projects';
 import { BLOG_POSTS } from '../constants';
 import { Calendar, ArrowRight, ArrowUpRight } from 'lucide-react';
 import { motion } from 'motion/react';
+import { Link } from 'react-router-dom';
 
 const ProjectsPage = () => {
   return (
@@ -26,44 +27,51 @@ const ProjectsPage = () => {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-            {BLOG_POSTS.map((post, index) => (
-              <motion.article 
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {BLOG_POSTS.slice(0, 4).map((post, index) => (
+              <motion.article
                 key={post.id}
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
-                className="group cursor-pointer flex flex-col h-full"
+                className="group flex flex-col h-full bg-white/5 rounded-[1.5rem] overflow-hidden border border-white/10 hover:bg-white/10 transition-all duration-300"
               >
-                <div className="relative aspect-[16/10] rounded-[2rem] overflow-hidden mb-8 shadow-lg border border-white/10">
-                  <div className="absolute inset-0 bg-brand-dark/40 group-hover:bg-transparent transition-colors duration-500 z-10"></div>
-                  <img 
-                    src={post.image} 
-                    alt={post.title} 
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
+                <div className="relative aspect-[4/3] overflow-hidden">
+                  <img
+                    src={post.image}
+                    alt={post.title}
+                    className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700"
                     referrerPolicy="no-referrer"
                     loading="lazy"
                   />
-                  <div className="absolute top-6 right-6 bg-white/10 backdrop-blur-md px-4 py-2 rounded-full text-sm font-bold text-white border border-white/20 z-20 flex items-center gap-2">
-                    <Calendar size={14} className="text-brand-primary" />
-                    {new Date(post.date).toLocaleDateString('fr-FR', { day: 'numeric', month: 'short', year: 'numeric' })}
+                  <div className="absolute top-3 left-3 bg-black/50 backdrop-blur-sm px-2.5 py-1 rounded-full text-xs font-bold text-white flex items-center gap-1.5">
+                    <Calendar size={10} className="text-brand-primary" />
+                    {new Date(post.date).toLocaleDateString('fr-FR', { month: 'short', year: 'numeric' })}
                   </div>
                 </div>
-                
-                <div className="flex-1 flex flex-col">
-                  <h3 className="text-3xl font-bold mb-4 group-hover:text-brand-primary transition-colors leading-tight">{post.title}</h3>
-                  <p className="text-gray-400 leading-relaxed mb-6 text-lg line-clamp-3">{post.excerpt}</p>
-                  
-                  <div className="mt-auto pt-6 border-t border-white/10 flex items-center justify-between">
-                    <span className="font-bold text-white group-hover:text-brand-primary transition-colors">Lire l'article complet</span>
-                    <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center group-hover:bg-brand-primary group-hover:text-white transition-all">
-                      <ArrowUpRight size={20} />
-                    </div>
-                  </div>
+                <div className="p-5 flex flex-col flex-grow">
+                  <h3 className="text-base font-bold text-white mb-2 line-clamp-2 group-hover:text-brand-primary transition-colors leading-snug">{post.title}</h3>
+                  <p className="text-gray-400 text-sm leading-relaxed line-clamp-3 flex-grow">{post.excerpt}</p>
+                  <Link
+                    to={`/blog/${post.id}`}
+                    className="mt-4 inline-flex items-center gap-1.5 text-brand-primary text-sm font-bold hover:gap-2.5 transition-all"
+                  >
+                    Lire <ArrowUpRight size={14} />
+                  </Link>
                 </div>
               </motion.article>
             ))}
+          </div>
+
+          {/* Button */}
+          <div className="mt-12 text-center">
+            <Link
+              to="/blog"
+              className="inline-flex items-center gap-3 bg-white text-brand-dark px-8 py-4 rounded-full font-bold hover:bg-brand-primary hover:text-white transition-all group"
+            >
+              Voir tous les articles <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
+            </Link>
           </div>
         </div>
       </section>
