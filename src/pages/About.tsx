@@ -205,13 +205,13 @@ const About = () => {
           <div className="aspect-[21/9] rounded-3xl overflow-hidden shadow-2xl relative">
             <img 
               src="https://scontent-bru2-1.xx.fbcdn.net/v/t39.30808-6/603085061_1181759967486445_9023473575802469898_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=7b2446&_nc_ohc=hjAoPEcwtmoQ7kNvwETS48Q&_nc_oc=Adm5bIpELTZoKRNYZeFLJHsrqQ9HbL4K3JYd1C4gaiSm4LodhHWKUKCo1lXk8WfP5k4&_nc_zt=23&_nc_ht=scontent-bru2-1.xx&_nc_gid=UrBx_eZUXuF6KpLv6GmZgg&_nc_ss=8&oh=00_AfxjqLCKRRhE5gyrM0QLdVTEXs4IXoqZic46pSnPsAB6EA&oe=69B4EB3F" 
-              alt="Atelier de Noël FOM à Paris (2025)" 
+              alt="Atelier de Noël à Kinshasa, centre Wallonie-Bruxelles (2025)" 
               className="w-full h-full object-cover"
               referrerPolicy="no-referrer"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent flex flex-col justify-end p-8 md:p-12">
               <h3 className="text-white text-2xl md:text-4xl font-bold mb-2">Ensemble, nous créons un avenir meilleur.</h3>
-              <p className="text-gray-300 font-medium">Atelier de Noël FOM à Paris (2025)</p>
+              <p className="text-gray-300 font-medium">Atelier de Noël à Kinshasa, centre Wallonie-Bruxelles (2025)</p>
             </div>
           </div>
         </div>
